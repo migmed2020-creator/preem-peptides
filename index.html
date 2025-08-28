@@ -1,208 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Preem Peptides – Research Products</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script defer src="script.js"></script>
-  </head>
-  <body>
-    <!--
-      Age verification modal.  A modal is displayed when the page first loads
-      requiring the user to confirm they are at least 18 years of age before
-      accessing the content.  The modal is implemented using basic HTML and
-      hidden/shown via the accompanying JavaScript in script.js.  This helps
-      ensure that only adults proceed to view and order research products.
-    -->
-    <div id="ageModal" class="modal" aria-modal="true" role="dialog" tabindex="-1">
-      <div class="modal-content">
-        <h2>Age Verification</h2>
-        <p>
-          The items listed on this site are sold strictly for laboratory research
-          only. By clicking “Enter” you confirm that you are at least 18 years
-          old and legally permitted to purchase these products.
-        </p>
-        <button id="enterBtn" class="btn">Enter</button>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preem Peptides Research</title>
+  <!-- Link to the site stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Age verification overlay -->
+  <div id="ageModal" class="modal-overlay">
+    <div class="modal-content">
+      <h2>Age Verification</h2>
+      <p>You must be at least 18 years old to view this site.</p>
+      <button id="ageConfirmBtn" class="btn">I am 18 or older</button>
     </div>
+  </div>
 
-    <header class="header">
-      <!-- Company logo with descriptive alt text for accessibility -->
-      <img src="logo.png" alt="Preem Peptides logo" class="logo" />
-      <div class="header-text">
-        <h1>Preem Peptides</h1>
-        <p class="tagline">All peptides require BAC water for reconstitution</p>
-      </div>
-    </header>
+  <!-- Header with logo and site title -->
+  <header>
+    <div class="header-container">
+      <img src="logo.png" alt="Preem Peptides logo" class="site-logo">
+      <h1 class="site-title">Preem&nbsp;Peptides</h1>
+    </div>
+    <button id="cartToggleBtn" class="cart-toggle" aria-label="Toggle cart">
+      🛒<span id="cartCount" class="cart-count">0</span>
+    </button>
+  </header>
 
-    <main>
-      <!-- Weight Loss & Appetite Control Category -->
-      <section class="category" id="weight-loss">
-        <h2>Weight Loss &amp; Appetite Control</h2>
-        <article class="product">
-          <h3>Retatrutide</h3>
-          <p>5 mg – $60 | 10 mg – $90 | 15 mg – $105 | 20 mg – $130</p>
-        </article>
-        <article class="product">
-          <h3>Semaglutide</h3>
-          <p>5 mg – $75 | 10 mg – $105 | 15 mg – $135 | 20 mg – $170 | 30 mg – $205</p>
-        </article>
-        <article class="product">
-          <h3>Cagrilintide</h3>
-          <p>5 mg – $90 | 10 mg – $150</p>
-        </article>
-        <article class="product">
-          <h3>AOD9604</h3>
-          <p>2 mg – $45 | 5 mg – $80</p>
-        </article>
-      </section>
+  <!-- Main content where products will be rendered -->
+  <main>
+    <p class="note">All peptides require BAC water for reconstitution.</p>
+    <!-- Product categories and items will be inserted here by script.js -->
+    <div id="productContainer" class="product-container"></div>
+  </main>
 
-      <!-- Muscle Growth, Strength & Performance Category -->
-      <section class="category" id="muscle-growth">
-        <h2>Muscle Growth, Strength &amp; Performance</h2>
-        <article class="product">
-          <h3>IGF‑1 LR3</h3>
-          <p>1 mg – $85</p>
-        </article>
-        <article class="product">
-          <h3>GDF‑8 (Myostatin Inhibitor)</h3>
-          <p>1 mg – $80</p>
-        </article>
-        <article class="product">
-          <h3>Ipamorelin</h3>
-          <p>5 mg – $40 | 10 mg – $75</p>
-        </article>
-        <article class="product">
-          <h3>CJC‑1295</h3>
-          <p>2 mg – $30 | 5 mg – $70</p>
-        </article>
-        <article class="product">
-          <h3>Tesamorelin</h3>
-          <p>2 mg – $35 | 5 mg – $50 | 10 mg – $90</p>
-        </article>
-        <article class="product">
-          <h3>Sermorelin</h3>
-          <p>2 mg – $25 | 5 mg – $60</p>
-        </article>
-      </section>
+  <!-- Cart sidebar -->
+  <aside id="cartSidebar" class="cart-sidebar">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button id="closeCartBtn" class="close-cart" aria-label="Close cart">×</button>
+    </div>
+    <div id="cartItems" class="cart-items">
+      <!-- Items added to cart will be displayed here -->
+    </div>
+    <div class="cart-footer">
+      <p class="cart-subtotal">Subtotal: $<span id="cartSubtotal">0.00</span></p>
+      <p class="cart-tax">Tax (7%): $<span id="cartTax">0.00</span></p>
+      <p class="cart-shipping">Shipping: $<span id="cartShipping">15.00</span></p>
+      <p class="cart-total">Total: $<span id="cartTotal">0.00</span></p>
+      <button id="paymentBtn" class="btn checkout-btn">Pay with Venmo</button>
+    </div>
+  </aside>
 
-      <!-- Healing, Recovery & Anti‑Inflammatory Category -->
-      <section class="category" id="healing">
-        <h2>Healing, Recovery &amp; Anti‑Inflammatory</h2>
-        <article class="product">
-          <h3>BPC‑157</h3>
-          <p>10 mg – $95</p>
-        </article>
-        <article class="product">
-          <h3>TB‑500</h3>
-          <p>5 mg – $60 | 10 mg – $105</p>
-        </article>
-        <article class="product">
-          <h3>GLOW Blend</h3>
-          <p>(BPC‑157 10 mg / GHK‑CU 50 mg / TB‑500 10 mg) – $110</p>
-        </article>
-        <article class="product">
-          <h3>Thymosin Alpha‑1</h3>
-          <p>5 mg – $65 | 10 mg – $100</p>
-        </article>
-      </section>
+  <!-- Checkout/Payment modal -->
+  <div id="checkoutModal" class="modal-overlay hidden">
+    <div class="modal-content large">
+      <h2>Payment &amp; Shipping</h2>
+      <form id="checkoutForm">
+        <!-- Order summary -->
+        <div id="orderSummary" class="order-summary" style="margin-bottom: 1rem;"></div>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" name="address" required>
+        </div>
+        <div class="form-group">
+          <label for="zip">ZIP Code</label>
+          <input type="text" id="zip" name="zip" required>
+        </div>
+        <p class="small-note">Upon clicking Pay Now, you will be redirected to Venmo to complete your payment. At the same time, your default email client will open a pre‑filled message with your order details addressed to Preem Peptides. Please attach a screenshot of your Venmo payment as proof of payment and send that email to complete your order. Shipping is a flat $15 and tax is 7% of your subtotal.</p>
+        <button type="submit" class="btn submit-order-btn">Pay Now</button>
+        <button type="button" id="cancelCheckoutBtn" class="btn secondary-btn">Cancel</button>
+      </form>
+    </div>
+  </div>
 
-      <!-- Anti‑Aging/Longevity & Cosmetic Category -->
-      <section class="category" id="anti-aging">
-        <h2>Anti‑Aging / Longevity &amp; Cosmetic</h2>
-        <article class="product">
-          <h3>Epitalon</h3>
-          <p>10 mg – $40 | 50 mg – $90</p>
-        </article>
-        <article class="product">
-          <h3>GHK‑CU</h3>
-          <p>50 mg – $55 | 100 mg – $90</p>
-        </article>
-        <article class="product">
-          <h3>NAD+</h3>
-          <p>100 mg – $50 | 500 mg – $100</p>
-        </article>
-        <article class="product">
-          <h3>Glutathione</h3>
-          <p>1500 mg – $65</p>
-        </article>
-        <article class="product">
-          <h3>SNAP‑8 (Anti‑Wrinkle Peptide)</h3>
-          <p>10 mg – $45</p>
-        </article>
-      </section>
-
-      <!-- Cognitive & Neurological Support Category -->
-      <section class="category" id="cognitive">
-        <h2>Cognitive &amp; Neurological Support</h2>
-        <article class="product">
-          <h3>Semax</h3>
-          <p>5 mg – $45 | 10 mg – $85</p>
-        </article>
-        <article class="product">
-          <h3>MOTS‑C</h3>
-          <p>10 mg – $75 | 40 mg – $105</p>
-        </article>
-        <article class="product">
-          <h3>SS‑31</h3>
-          <p>10 mg – $80 | 50 mg – $100</p>
-        </article>
-      </section>
-
-      <!-- Libido & Sexual Health Category -->
-      <section class="category" id="libido">
-        <h2>Libido &amp; Sexual Health</h2>
-        <article class="product">
-          <h3>PT‑141 (Bremelanotide)</h3>
-          <p>10 mg – $70</p>
-        </article>
-        <article class="product">
-          <h3>HCG</h3>
-          <p>2000 IU – $45 | 5000 IU – $65 | 10000 IU – $120</p>
-        </article>
-      </section>
-
-      <!-- Reconstitution Category -->
-      <section class="category" id="reconstitution">
-        <h2>Reconstitution</h2>
-        <article class="product">
-          <h3>BAC Water</h3>
-          <p>10 ml – $10</p>
-        </article>
-      </section>
-
-      <!-- Ordering instructions -->
-      <section class="order-info">
-        <h2>How to Order</h2>
-        <p>
-          To place an order please send an email to
-          <a href="mailto:mig.med2020@gmail.com">mig.med2020@gmail.com</a> with
-          the following information:
-        </p>
-        <ul>
-          <li>A list of the product(s) you wish to purchase</li>
-          <li>Your full name</li>
-          <li>Your shipping address</li>
-        </ul>
-        <p>Our team will reach out to confirm your order and provide payment details.</p>
-      </section>
-    </main>
-
-    <footer>
-      <p>
-        © <strong>Preem Peptides</strong> | Contact us at
-        <a href="mailto:mig.med2020@gmail.com">mig.med2020@gmail.com</a>
-      </p>
-      <p>
-        Learn more about peptides and their applications from
-        <a
-          href="https://www.mcgill.ca/oss/article/medical-did-you-know/there-much-pep-peptide-research"
-          target="_blank"
-          rel="noopener"
-          >this article</a
-        >.
-      </p>
-    </footer>
-  </body>
+  <!-- Script for dynamic behaviour -->
+  <script src="script.js"></script>
+</body>
 </html>
